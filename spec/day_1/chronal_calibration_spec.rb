@@ -2,7 +2,7 @@
 
 require_relative '../../lib/day_1/chronal_calibration'
 
-describe ChronalCalibration do
+describe ChronalCalibration, type: :day_1 do
   let(:input_file) {}
   subject { described_class.new input_file }
   let(:result) { subject.call }
