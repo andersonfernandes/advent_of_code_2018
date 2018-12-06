@@ -10,19 +10,14 @@ class ChronalCalibration
 
   def call
     return unless input_filename
+    input = File.readlines(input_filename).map(&:to_i)
 
     current_frequency = 0
-    frequency_not_found = true
-    while frequency_not_found
-      File.open(input_filename, 'r').each_line do |line|
-        current_frequency += line.to_i
-        if frequency_exists?(current_frequency)
-          frequency_not_found = false
-          break
-        end
+    input.cycle.each do |value|
+      current_frequency += value
+      break if frequency_exists?(current_frequency)
 
-        process_frequency(current_frequency)
-      end
+      process_frequency(current_frequency)
     end
 
     current_frequency
